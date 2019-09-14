@@ -1,0 +1,24 @@
+<Behaviour>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent1</agentName>
+<subsystemName>cs1</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Square</behaviourName>
+<behaviourId>3</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> iterations.data>MAX_ITERATIONS </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+iterations.data++;
+mode.data=currentMode.data;
+									
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Square] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Square] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+

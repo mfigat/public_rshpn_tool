@@ -1,0 +1,63 @@
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>MoveAlong</behaviourName>
+<behaviourId>3</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> _veTerminalCondition.data==1 </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+// code
+_veTerminalCondition.data=0;
+_beginMovement.data=0;
+_moveNorthFinished.data=0;
+_moveEastFinished.data=0;
+_moveSouthFinished.data=0;
+_moveWestFinished.data=0;
+_outputBufferTwist.angular.z=0;
+// #########################
+// do something
+
+std_msgs::Float64 distance;
+distance.data= (_lastTurtlePosition.x-_turtlePose.x)*(_lastTurtlePosition.x-_turtlePose.x)+(_lastTurtlePosition.y-_turtlePose.y)*(_lastTurtlePosition.y-_turtlePose.y);
+distance.data=sqrt(distance.data);
+
+_linearSpeed.data=((MAX_DISTANCE-distance.data)/MAX_DISTANCE)*MOVE_ALONG_SPEED;
+
+// move along without rotation
+_outputBufferTwist.linear.x=_linearSpeed.data;
+
+_veTerminalCondition.data=abs(MAX_DISTANCE-distance.data)<EPSILON_MOVE;
+
+// #########################
+
+if(_veTerminalCondition.data==1)
+{
+	if(_desiredDirection.data==GO_NORTH){
+		_moveNorthFinished.data=1;
+	}
+	else if(_desiredDirection.data==GO_EAST){
+		_moveEastFinished.data=1;
+	}
+	else if(_desiredDirection.data==GO_SOUTH){
+		_moveSouthFinished.data=1;
+	}
+	else if(_desiredDirection.data==GO_WEST){
+		_moveWestFinished.data=1;
+	}
+}
+
+std::cout<<"[VE - MOVE ALONG] - direction="<<_desiredDirection.data<<" distance="<<distance.data<<" terminalCondition="<<_veTerminalCondition.data<<" last position x="<<_lastTurtlePosition.x<<" y="<<_lastTurtlePosition.y<<"current turtle position x="<<_turtlePose.x<<" y="<<_turtlePose.y<<std::endl;
+								
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour MoveAlong] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour MoveAlong] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+

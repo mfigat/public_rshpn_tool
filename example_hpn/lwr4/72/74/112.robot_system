@@ -1,0 +1,37 @@
+<Behaviour>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent2</agentName>
+<subsystemName>cs2</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>MoveTo</behaviourName>
+<behaviourId>2</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody>  mode.data!=lastMode.data </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+iterations.data=0;
+// calculate next desired x,y,z coordinates
+if(mode.data!=lastMode.data){
+	return;
+}
+if(mode.data==MOVE_ALONG_CIRCLE_TRAJECTORY){
+	LWR4KinematicsDynamics::calculateNextEndEffectorPosition_Circle_ZY_Plane(_iterations2, _iterations, x_d, y_d, z_d, _flag, 0.3, 0, 0, 0.5);
+}
+if(mode.data==MOVE_ALONG_SQUARE_TRAJECTORY){
+	LWR4KinematicsDynamics::calculateNextEndEffectorPosition_Square_ZY_Plane(_iterations2, _iterations, x_d, y_d, z_d, _flag, 0.3, 0, 0, 0.5);
+}
+desired_x.data=x_d;
+desired_y.data=y_d;
+desired_z.data=z_d;
+
+									
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour MoveTo] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour MoveTo] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+

@@ -1,0 +1,206 @@
+<Subsystem>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent2</agentName>
+<subsystemName>cs2</subsystemName>
+<subsystemType>c</subsystemType>
+<subsystemIndex>1</subsystemIndex>
+<subsystemFrequency>200</subsystemFrequency>
+<subsystemIncludeFile>
+#include "../../../../my_libs/lwr4_kinematics_dynamics/lwr4_kinematics_dynamics.h"
+#include "../../../../my_libs/shared_memory/shared_memory.h"
+
+/* Desired positions */
+double x_d=0.56, y_d=0.17, z_d=0.8;
+int _iterations2=0;
+int _iterations=0;
+bool _flag=true;
+
+#define MOVE_ALONG_CIRCLE_TRAJECTORY 0
+#define MOVE_ALONG_SQUARE_TRAJECTORY 1
+
+#define MAX_ITERATIONS_HOME_POSITION 1000 // 10 seconds
+				</subsystemIncludeFile>
+<isNonBlockingMode>100</isNonBlockingMode>
+<isInitialStateSpecified>0</isInitialStateSpecified>
+<initialStateName>S_Init</initialStateName>
+<initialStateId>0</initialStateId>
+<SubsystemStates>
+<SubsystemState>
+<stateName>S_Init</stateName>
+<stateId>0</stateId>
+<behaviourId>0</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_Idle</nextStateName>
+<nextStateId>1</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_Idle</stateName>
+<stateId>1</stateId>
+<behaviourId>1</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_MoveTo</nextStateName>
+<nextStateId>2</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_MoveTo</stateName>
+<stateId>2</stateId>
+<behaviourId>2</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_Idle</nextStateName>
+<nextStateId>1</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+</SubsystemStates>
+<Behaviours>
+<Behaviour>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent2</agentName>
+<subsystemName>cs2</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Init</behaviourName>
+<behaviourId>0</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> true </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_2*/
+ 
+iterations.data=0;
+mode.data=MOVE_ALONG_CIRCLE_TRAJECTORY;
+
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Init] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Init] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent2</agentName>
+<subsystemName>cs2</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Idle</behaviourName>
+<behaviourId>1</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> iterations.data>MAX_ITERATIONS_HOME_POSITION </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_2*/
+ 
+flag.data=1;
+x_d=0;
+y_d=0;
+z_d=0.5;
+desired_x.data=x_d;
+desired_y.data=y_d;
+desired_z.data=z_d;
+
+iterations.data++;
+lastMode.data=mode.data;
+
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Idle] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Idle] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent2</agentName>
+<subsystemName>cs2</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>MoveTo</behaviourName>
+<behaviourId>2</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody>  mode.data!=lastMode.data </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+iterations.data=0;
+// calculate next desired x,y,z coordinates
+if(mode.data!=lastMode.data){
+	return;
+}
+if(mode.data==MOVE_ALONG_CIRCLE_TRAJECTORY){
+	LWR4KinematicsDynamics::calculateNextEndEffectorPosition_Circle_ZY_Plane(_iterations2, _iterations, x_d, y_d, z_d, _flag, 0.3, 0, 0, 0.5);
+}
+if(mode.data==MOVE_ALONG_SQUARE_TRAJECTORY){
+	LWR4KinematicsDynamics::calculateNextEndEffectorPosition_Square_ZY_Plane(_iterations2, _iterations, x_d, y_d, z_d, _flag, 0.3, 0, 0, 0.5);
+}
+desired_x.data=x_d;
+desired_y.data=y_d;
+desired_z.data=z_d;
+
+									
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour MoveTo] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour MoveTo] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+</Behaviours>
+<InternalBuffers>
+<Buffer>
+<bufferName>flag</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>flag</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>lastMode</bufferName>
+<bufferDataType>std_msgs::Int64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>lastMode</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>iterations</bufferName>
+<bufferDataType>std_msgs::Int64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>iterations</connectionName>
+</Buffer>
+</InternalBuffers>
+<InputBuffers>
+<Buffer>
+<bufferName>mode</bufferName>
+<bufferDataType>std_msgs::Int64</bufferDataType>
+<bufferType>1</bufferType>
+<connectionName>/agent1/mode</connectionName>
+</Buffer>
+</InputBuffers>
+<OutputBuffers>
+<Buffer>
+<bufferName>desired_x</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>2</bufferType>
+<connectionName>desired_x</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>desired_y</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>2</bufferType>
+<connectionName>desired_y</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>desired_z</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>2</bufferType>
+<connectionName>desired_z</connectionName>
+</Buffer>
+</OutputBuffers>
+</Subsystem>
+

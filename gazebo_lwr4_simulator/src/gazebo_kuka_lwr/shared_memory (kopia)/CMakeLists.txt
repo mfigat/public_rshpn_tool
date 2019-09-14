@@ -1,0 +1,1 @@
+/home/maximus/git/phd/projekty/shared_memory/CMakeLists.txt

@@ -1,0 +1,88 @@
+<Subsystem>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType>e</subsystemType>
+<subsystemIndex>2</subsystemIndex>
+<subsystemFrequency>5</subsystemFrequency>
+<subsystemIncludeFile> 
+</subsystemIncludeFile>
+<isNonBlockingMode>0</isNonBlockingMode>
+<isInitialStateSpecified>0</isInitialStateSpecified>
+<initialStateName>S_Init</initialStateName>
+<initialStateId>0</initialStateId>
+<SubsystemStates>
+<SubsystemState>
+<stateName>S_Init</stateName>
+<stateId>0</stateId>
+<behaviourId>0</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_Move</nextStateName>
+<nextStateId>1</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_Move</stateName>
+<stateId>1</stateId>
+<behaviourId>1</behaviourId>
+<ChildStates>
+</ChildStates>
+</SubsystemState>
+</SubsystemStates>
+<Behaviours>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Init</behaviourName>
+<behaviourId>0</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> true </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+
+
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Init] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Init] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Move</behaviourName>
+<behaviourId>1</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> _beginMovement.data==1 && _desiredDirection.data!=0 </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+
+							
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Move] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Move] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+</Behaviours>
+<InternalBuffers>
+</InternalBuffers>
+<InputBuffers>
+</InputBuffers>
+<OutputBuffers>
+</OutputBuffers>
+</Subsystem>
+

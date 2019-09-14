@@ -1,0 +1,30 @@
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Idle</behaviourName>
+<behaviourId>1</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> _beginMovement.data==1 && _desiredDirection.data!=0 </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+_rotationSpeed.data=ROTATE_ANGLE;
+_linearSpeed.data=MOVE_ALONG_SPEED;
+_outputBufferTwist.linear.x=0; 							// do not move in x-y plane
+_outputBufferTwist.angular.z=0;							// do not rotate around z-axis
+_lastTurtlePosition=_turtlePose; // update turtle pose - for move along behaviour
+
+
+std::cout<<"[VE - IDLE] - direction="<<_desiredDirection.data<<" current turtle position x="<<_turtlePose.x<<" y="<<_turtlePose.y<<std::endl;
+							
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Idle] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Idle] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+

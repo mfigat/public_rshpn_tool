@@ -1,0 +1,308 @@
+<Subsystem>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType>e</subsystemType>
+<subsystemIndex>2</subsystemIndex>
+<subsystemFrequency>10</subsystemFrequency>
+<subsystemIncludeFile> 
+#define VE_MAX_ITERATION 7 
+#define MAX_DISTANCE 4
+					</subsystemIncludeFile>
+<isNonBlockingMode>0</isNonBlockingMode>
+<isInitialStateSpecified>0</isInitialStateSpecified>
+<initialStateName>S_Idle</initialStateName>
+<initialStateId>0</initialStateId>
+<SubsystemStates>
+<SubsystemState>
+<stateName>S_Idle</stateName>
+<stateId>0</stateId>
+<behaviourId>0</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_Rotate</nextStateName>
+<nextStateId>1</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_Rotate</stateName>
+<stateId>1</stateId>
+<behaviourId>1</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_MoveAlong</nextStateName>
+<nextStateId>2</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_MoveAlong</stateName>
+<stateId>2</stateId>
+<behaviourId>2</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_Rotate</nextStateName>
+<nextStateId>1</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+</SubsystemStates>
+<Behaviours>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Idle</behaviourName>
+<behaviourId>0</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> true </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+_inputBufferDirection.data=0;
+_isFirstIterationOfRotate.data=1;
+_isNewDirectionSpecified.data=0; // no new direction specified
+_internalBufferLastTurtlePosition.theta=-3.14159265359;
+_rotationCompleted.data=0;
+_isFirstIterationOfMoveAlong.data=1;
+								
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Idle] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Idle] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Rotate</behaviourName>
+<behaviourId>1</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> _veTerminalCondition.data==1 </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+std::cout<<"Message="<<_inputBufferDirection.data<<std::endl;
+
+// wait for cmd from control subsystem
+
+
+
+if(_inputBufferDirection.data != _currentDirection.data){ // there is new direction specified
+	_currentDirection.data=_inputBufferDirection.data; // update current direction
+	_isNewDirectionSpecified.data=1;
+	_rotationSpeed.data=ROTATE_ANGLE;
+	_rotationLeft.data=0;
+	_rotationRight.data=0;
+	
+	if(_inputBufferDirection.data == GO_NORTH)
+		_desiredAngle.data=GO_NORTH_DIRECTION;
+	else if(_inputBufferDirection.data == GO_EAST)
+		_desiredAngle.data=GO_EAST_DIRECTION;
+	else if(_inputBufferDirection.data == GO_SOUTH)
+		_desiredAngle.data=GO_SOUTH_DIRECTION;
+	else if(_inputBufferDirection.data == GO_WEST)
+		_desiredAngle.data=GO_WEST_DIRECTION;
+}
+else { // the same direction do nothing
+	// do nothing
+}
+
+if(_isNewDirectionSpecified.data == 0){
+	return;
+}
+
+// checks if this is the first iteration of rotate behaviour (first after move along behaviour) - if so set current robot position
+if(_isFirstIterationOfRotate.data==1){ // set current robot position - only once at the beginning of rotate behaviour
+	_isFirstIterationOfRotate.data=0;
+	_internalBufferLastTurtlePosition=_inputBufferTurtlePose;
+}
+
+//if(abs(_inputBufferTurtlePose.theta-_internalBufferLastTurtlePosition.theta)>std::atan(1.0)*4){ // if the turtle moved around a circle (the measured angle switches from -pi to + pi)
+//	_internalBufferLastTurtlePosition=_inputBufferTurtlePose;
+//}
+
+// rotate by specific angle around z-axis
+_outputBufferTwist.linear.x=0; 							// do not move in x-y plane
+
+std_msgs::Float64 tmp, tmpCurrentTheta;
+tmpCurrentTheta.data=_inputBufferTurtlePose.theta;
+if(tmpCurrentTheta.data<0 && _inputBufferDirection.data != GO_EAST){
+	tmpCurrentTheta.data+=TWO_PI;
+}
+
+tmp.data=(_desiredAngle.data -tmpCurrentTheta.data);
+if(tmp.data < -EPSILON){
+	_outputBufferTwist.angular.z=-_rotationSpeed.data; 	// rotate by small angle around z axis -- rotate left
+	_rotationLeft.data=1;
+}
+else if (tmp.data>EPSILON){
+	_outputBufferTwist.angular.z=_rotationSpeed.data; 	// rotate by small angle around z axis -- rotate right
+	_rotationRight.data=1;
+}
+
+if(	_rotationLeft.data==1 && _rotationRight.data==1){
+	_rotationSpeed.data/=2;
+	_rotationLeft.data=0;
+	_rotationRight.data=0;
+}
+
+//_veTerminalCondition.data=abs(_inputBufferTurtlePose.theta-_internalBufferLastTurtlePosition.theta)>std::atan(1.0)*4 || abs(_desiredAngle.data - abs(_internalBufferLastTurtlePosition.theta-_inputBufferTurtlePose.theta)) < EPSILON;
+
+
+
+
+_veTerminalCondition.data=abs(tmp.data) < EPSILON;
+
+_rotationCompleted.data=_veTerminalCondition.data; // set if rotation was completed
+
+
+//_internalBufferInt.data=_inputBufferDirection.data;
+
+std::cout<<"[Rotate] -- Turtle desired_theta="<< _desiredAngle.data<<" current_theta="<<_inputBufferTurtlePose.theta<<" delta="<<tmp.data<<" terminal condition="<<_veTerminalCondition.data<<std::endl;
+								
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Rotate] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Rotate] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>MoveAlong</behaviourName>
+<behaviourId>2</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> _inputBufferDirection.data != _currentDirection.data </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+
+if(_isFirstIterationOfMoveAlong.data==1){ // first iteration of move along behaviour
+	_isFirstIterationOfMoveAlong.data=0;
+	_internalBufferLastTurtlePosition=_inputBufferTurtlePose;
+}
+
+
+
+// move along without rotation
+_outputBufferTwist.linear.x=1;
+_outputBufferTwist.angular.z=0;
+_isFirstIterationOfRotate.data=1;
+
+std::cout<<"[Move Along] -- Turtle last_theta="<< _internalBufferLastTurtlePosition.theta<<" current_theta="<<_inputBufferTurtlePose.theta<<" delta="<<_desiredAngle.data - abs(_internalBufferLastTurtlePosition.theta-_inputBufferTurtlePose.theta)<<" Received direction="<<_inputBufferDirection.data<<" current direction="<<_currentDirection.data<<std::endl;
+								
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour MoveAlong] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour MoveAlong] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+</Behaviours>
+<InternalBuffers>
+<Buffer>
+<bufferName>_currentDirection</bufferName>
+<bufferDataType>std_msgs::Int64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>_currentDirection</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>_isFirstIterationOfRotate</bufferName>
+<bufferDataType>std_msgs::Int64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>_isFirstIterationOfRotate</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>_internalBufferLastTurtlePosition</bufferName>
+<bufferDataType>turtlesim::Pose</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>_internalBufferLastTurtlePosition</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>_isNewDirectionSpecified</bufferName>
+<bufferDataType>std_msgs::Int64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>_isNewDirectionSpecified</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>_rotationSpeed</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>_rotationSpeed</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>_rotationLeft</bufferName>
+<bufferDataType>std_msgs::Int64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>_rotationLeft</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>_rotationRight</bufferName>
+<bufferDataType>std_msgs::Int64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>_rotationRight</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>_veTerminalCondition</bufferName>
+<bufferDataType>std_msgs::Int64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>_veTerminalCondition</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>_desiredAngle</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>_desiredAngle</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>_isFirstIterationOfMoveAlong</bufferName>
+<bufferDataType>std_msgs::Int64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>_isFirstIterationOfMoveAlong</connectionName>
+</Buffer>
+</InternalBuffers>
+<InputBuffers>
+<Buffer>
+<bufferName>_inputBufferDirection</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>1</bufferType>
+<connectionName>topicDirection</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>_inputBufferTurtlePose</bufferName>
+<bufferDataType>turtlesim::Pose</bufferDataType>
+<bufferType>1</bufferType>
+<connectionName>/turtle1/pose</connectionName>
+</Buffer>
+</InputBuffers>
+<OutputBuffers>
+<Buffer>
+<bufferName>_outputBufferTwist</bufferName>
+<bufferDataType>geometry_msgs::Twist</bufferDataType>
+<bufferType>2</bufferType>
+<connectionName>/turtle1/cmd_vel</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>_rotationCompleted</bufferName>
+<bufferDataType>std_msgs::Int64</bufferDataType>
+<bufferType>2</bufferType>
+<connectionName>isRotationCompleted</connectionName>
+</Buffer>
+</OutputBuffers>
+</Subsystem>
+

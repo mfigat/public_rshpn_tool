@@ -1,0 +1,7 @@
+<launch>
+	<group ns="agent">
+		<node pkg="agent" name="cs" type="cs"/>
+		<node pkg="agent" name="ve" type="ve"/>
+	</group>
+</launch>
+

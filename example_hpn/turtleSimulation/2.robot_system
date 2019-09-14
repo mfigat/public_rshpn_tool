@@ -1,0 +1,391 @@
+<Agent>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<agentType>C</agentType>
+<agentIndex>0</agentIndex>
+<agentIncludeFile> /* Some includes */
+</agentIncludeFile>
+<Subsystems>
+<Subsystem>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>cs</subsystemName>
+<subsystemType>c</subsystemType>
+<subsystemIndex>1</subsystemIndex>
+<subsystemFrequency>10</subsystemFrequency>
+<subsystemIncludeFile>
+</subsystemIncludeFile>
+<isNonBlockingMode>0</isNonBlockingMode>
+<isInitialStateSpecified>0</isInitialStateSpecified>
+<initialStateName>S_Idle</initialStateName>
+<initialStateId>0</initialStateId>
+<SubsystemStates>
+<SubsystemState>
+<stateName>S_Idle</stateName>
+<stateId>0</stateId>
+<behaviourId>0</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_moveNorth</nextStateName>
+<nextStateId>1</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_moveNorth</stateName>
+<stateId>1</stateId>
+<behaviourId>1</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_moveEast</nextStateName>
+<nextStateId>2</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_moveEast</stateName>
+<stateId>2</stateId>
+<behaviourId>2</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_moveSouth</nextStateName>
+<nextStateId>3</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_moveSouth</stateName>
+<stateId>3</stateId>
+<behaviourId>3</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_moveWest</nextStateName>
+<nextStateId>4</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_moveWest</stateName>
+<stateId>4</stateId>
+<behaviourId>4</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_moveNorth</nextStateName>
+<nextStateId>1</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+</SubsystemStates>
+<Behaviours>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>cs</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Idle</behaviourName>
+<behaviourId>0</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> true </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_2*/
+ 
+
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Idle] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Idle] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>cs</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>moveNorth</behaviourName>
+<behaviourId>1</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody>  _moveNorthFinished.data==1 </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour moveNorth] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour moveNorth] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>cs</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>moveEast</behaviourName>
+<behaviourId>2</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody>  _moveEastFinished.data==1 </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour moveEast] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour moveEast] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>cs</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>moveSouth</behaviourName>
+<behaviourId>3</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> _moveSouthFinished.data==1 </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour moveSouth] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour moveSouth] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>cs</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>moveWest</behaviourName>
+<behaviourId>4</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> _moveWestFinished.data==1 </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour moveWest] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour moveWest] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+</Behaviours>
+<InternalBuffers>
+<Buffer>
+<bufferName>_isFirst</bufferName>
+<bufferDataType>std_msgs::Int64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>_isFirst</connectionName>
+</Buffer>
+</InternalBuffers>
+<InputBuffers>
+<Buffer>
+<bufferName>_moveNorthFinished</bufferName>
+<bufferDataType>std_msgs::Int64</bufferDataType>
+<bufferType>1</bufferType>
+<connectionName>moveNorthFinished</connectionName>
+</Buffer>
+</InputBuffers>
+<OutputBuffers>
+<Buffer>
+<bufferName>_desiredAngle</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>2</bufferType>
+<connectionName>desiredAngle</connectionName>
+</Buffer>
+</OutputBuffers>
+</Subsystem>
+<Subsystem>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType>e</subsystemType>
+<subsystemIndex>2</subsystemIndex>
+<subsystemFrequency>5</subsystemFrequency>
+<subsystemIncludeFile> 
+</subsystemIncludeFile>
+<isNonBlockingMode>0</isNonBlockingMode>
+<isInitialStateSpecified>0</isInitialStateSpecified>
+<initialStateName>S_Init</initialStateName>
+<initialStateId>0</initialStateId>
+<SubsystemStates>
+<SubsystemState>
+<stateName>S_Init</stateName>
+<stateId>0</stateId>
+<behaviourId>0</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_Idle</nextStateName>
+<nextStateId>1</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_Idle</stateName>
+<stateId>1</stateId>
+<behaviourId>1</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_Rotate</nextStateName>
+<nextStateId>2</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_Rotate</stateName>
+<stateId>2</stateId>
+<behaviourId>2</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_MoveAlong</nextStateName>
+<nextStateId>3</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_MoveAlong</stateName>
+<stateId>3</stateId>
+<behaviourId>3</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_Idle</nextStateName>
+<nextStateId>1</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+</SubsystemStates>
+<Behaviours>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Init</behaviourName>
+<behaviourId>0</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> true </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Init] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Init] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Idle</behaviourName>
+<behaviourId>1</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> _beginMovement.data==1 && _desiredDirection.data!=0 </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Idle] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Idle] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Rotate</behaviourName>
+<behaviourId>2</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> _veTerminalCondition.data==1 </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+								
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Rotate] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Rotate] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>MoveAlong</behaviourName>
+<behaviourId>3</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> _veTerminalCondition.data==1 </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour MoveAlong] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour MoveAlong] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+</Behaviours>
+<InternalBuffers>
+<Buffer>
+<bufferName>_lastTurtlePosition</bufferName>
+<bufferDataType>turtlesim::Pose</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>_lastTurtlePosition</connectionName>
+</Buffer>
+</InternalBuffers>
+<InputBuffers>
+<Buffer>
+<bufferName>_turtlePose</bufferName>
+<bufferDataType>turtlesim::Pose</bufferDataType>
+<bufferType>1</bufferType>
+<connectionName>/turtle1/pose</connectionName>
+</Buffer>
+</InputBuffers>
+<OutputBuffers>
+<Buffer>
+<bufferName>_outputBufferTwist</bufferName>
+<bufferDataType>geometry_msgs::Twist</bufferDataType>
+<bufferType>2</bufferType>
+<connectionName>/turtle1/cmd_vel</connectionName>
+</Buffer>
+</OutputBuffers>
+</Subsystem>
+</Subsystems>
+</Agent>
+

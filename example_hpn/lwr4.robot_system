@@ -1,0 +1,303 @@
+<RobotSystemLayer>
+<robotSystemName>lwr4</robotSystemName>
+<robotSystemIncludeFile></robotSystemIncludeFile>
+<Agents>
+<Agent>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent</agentName>
+<agentType>C</agentType>
+<agentIndex>0</agentIndex>
+<agentIncludeFile>
+#include "ros/ros.h"
+#include <ros/duration.h>
+#include "std_msgs/String.h"
+#include "std_msgs/Int64.h"
+#include "std_msgs/Float64.h"
+#include "turtlesim/Pose.h"
+#include <math.h> 
+
+#define DEFAULT_ROS_FREQUENCY 1
+#define CHANNEL_SIZE 1
+
+
+				</agentIncludeFile>
+<Subsystems>
+<Subsystem>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>cs</subsystemName>
+<subsystemType>c</subsystemType>
+<subsystemIndex>1</subsystemIndex>
+<subsystemFrequency>200</subsystemFrequency>
+<subsystemIncludeFile>
+#include "../../../../my_libs/lwr4_kinematics_dynamics/lwr4_kinematics_dynamics.h"
+#include "../../../../my_libs/shared_memory/shared_memory.h"
+
+/* Desired positions */
+double x_d=0.56, y_d=0.17, z_d=0.8;
+int _iterations2=0;
+int _iterations=0;
+bool _flag=true;
+				</subsystemIncludeFile>
+<isNonBlockingMode>0</isNonBlockingMode>
+<isInitialStateSpecified>0</isInitialStateSpecified>
+<initialStateName>S_Idle</initialStateName>
+<initialStateId>0</initialStateId>
+<SubsystemStates>
+<SubsystemState>
+<stateName>S_Idle</stateName>
+<stateId>0</stateId>
+<behaviourId>0</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_MoveTo</nextStateName>
+<nextStateId>1</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_MoveTo</stateName>
+<stateId>1</stateId>
+<behaviourId>1</behaviourId>
+<ChildStates>
+</ChildStates>
+</SubsystemState>
+</SubsystemStates>
+<Behaviours>
+<Behaviour>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>cs</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Idle</behaviourName>
+<behaviourId>0</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> true </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_2*/
+ 
+flag.data=1;
+
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Idle] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Idle] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>cs</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>MoveTo</behaviourName>
+<behaviourId>1</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody>  false </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+
+// calculate next desired x,y,z coordinates
+LWR4KinematicsDynamics::calculateNextEndEffectorPosition_Circle_ZY_Plane(_iterations2, _iterations, x_d, y_d, z_d, _flag, 0.3, 0, 0, 0.5);
+desired_x.data=x_d;
+desired_y.data=y_d;
+desired_z.data=z_d;
+
+									
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour MoveTo] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour MoveTo] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+</Behaviours>
+<InternalBuffers>
+<Buffer>
+<bufferName>flag</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>flag</connectionName>
+</Buffer>
+</InternalBuffers>
+<InputBuffers>
+</InputBuffers>
+<OutputBuffers>
+<Buffer>
+<bufferName>desired_x</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>2</bufferType>
+<connectionName>desired_x</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>desired_y</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>2</bufferType>
+<connectionName>desired_y</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>desired_z</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>2</bufferType>
+<connectionName>desired_z</connectionName>
+</Buffer>
+</OutputBuffers>
+</Subsystem>
+<Subsystem>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType>e</subsystemType>
+<subsystemIndex>2</subsystemIndex>
+<subsystemFrequency>200</subsystemFrequency>
+<subsystemIncludeFile> 
+#include "../../../../my_libs/lwr4_kinematics_dynamics/lwr4_kinematics_dynamics.h"
+#include "../../../../my_libs/shared_memory/shared_memory.h"
+
+LWR4KinematicsDynamics lwr=LWR4KinematicsDynamics(0, 30, 0, 10);
+
+struct lwr4_kinematics_params tmp;
+SharedMemory<struct lwr4_kinematics_params> sm_consumer("shared_memory_lwr4_kinematics_params", SharedMemoryType::Consumer);
+
+struct lwr4_joints msg_tmp;
+SharedMemory<struct lwr4_joints> sm_producer("shared_memory_torque", SharedMemoryType::Producer);
+
+std::array<double,7> torque_grav, torque_impedance;
+
+/* Desired positions */
+double x_d=0.56, y_d=0.17, z_d=0.8;
+
+					</subsystemIncludeFile>
+<isNonBlockingMode>0</isNonBlockingMode>
+<isInitialStateSpecified>0</isInitialStateSpecified>
+<initialStateName>S_Init</initialStateName>
+<initialStateId>0</initialStateId>
+<SubsystemStates>
+<SubsystemState>
+<stateName>S_Init</stateName>
+<stateId>0</stateId>
+<behaviourId>0</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_Move</nextStateName>
+<nextStateId>1</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_Move</stateName>
+<stateId>1</stateId>
+<behaviourId>1</behaviourId>
+<ChildStates>
+</ChildStates>
+</SubsystemState>
+</SubsystemStates>
+<Behaviours>
+<Behaviour>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Init</behaviourName>
+<behaviourId>0</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> true </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+
+		
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Init] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Init] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Move</behaviourName>
+<behaviourId>1</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> false </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+x_d=desired_x.data;
+y_d=desired_y.data;
+z_d=desired_z.data;
+
+
+for(int i=0;i<7;i++){
+	torque_grav[i]=0;
+	torque_impedance[i]=0;
+}		
+
+// read data from shared memory
+tmp=sm_consumer.readAsynchronously();
+
+// ############## Gravitation compensation ################# */
+lwr.calculateGravitationCompensationTorque(tmp.theta1, tmp.theta2, tmp.theta3, tmp.theta4, tmp.theta5, tmp.theta6, tmp.theta7);
+
+// ############### Impedance control ############ */
+torque_impedance=lwr.impedanceControlInCartesianSpace(tmp.x_current, tmp.y_current, tmp.z_current, tmp.v_x, tmp.v_y, tmp.v_z, x_d, y_d, z_d);
+
+/* ################ Add two torques */
+for(int i=0;i<7;i++){
+	msg_tmp._joints[i] = torque_impedance[i] + torque_grav[i];
+  // std::cout <<"[Torque - calculated] torque"<<i+1<<"="<<msg_tmp._joints[i]<<std::endl;
+}
+
+/* ######## Send calculated torque ######## */
+sm_producer.writeAsynchronously(msg_tmp);
+
+
+							
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Move] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Move] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+</Behaviours>
+<InternalBuffers>
+</InternalBuffers>
+<InputBuffers>
+<Buffer>
+<bufferName>desired_x</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>1</bufferType>
+<connectionName>desired_x</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>desired_y</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>1</bufferType>
+<connectionName>desired_y</connectionName>
+</Buffer>
+<Buffer>
+<bufferName>desired_z</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>1</bufferType>
+<connectionName>desired_z</connectionName>
+</Buffer>
+</InputBuffers>
+<OutputBuffers>
+</OutputBuffers>
+</Subsystem>
+</Subsystems>
+</Agent>
+</Agents>
+</RobotSystemLayer>
+

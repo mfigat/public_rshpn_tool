@@ -1,0 +1,51 @@
+<Behaviour>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent2</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Move</behaviourName>
+<behaviourId>1</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> false </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+x_d=desired_x.data;
+y_d=desired_y.data;
+z_d=desired_z.data;
+
+
+for(int i=0;i<7;i++){
+	torque_grav[i]=0;
+	torque_impedance[i]=0;
+}		
+
+// read data from shared memory
+tmp=sm_consumer.readAsynchronously();
+
+// ############## Gravitation compensation ################# */
+lwr.calculateGravitationCompensationTorque(tmp.theta1, tmp.theta2, tmp.theta3, tmp.theta4, tmp.theta5, tmp.theta6, tmp.theta7);
+
+// ############### Impedance control ############ */
+torque_impedance=lwr.impedanceControlInCartesianSpace(tmp.x_current, tmp.y_current, tmp.z_current, tmp.v_x, tmp.v_y, tmp.v_z, x_d, y_d, z_d);
+
+/* ################ Add two torques */
+for(int i=0;i<7;i++){
+	msg_tmp._joints[i] = torque_impedance[i] + torque_grav[i];
+  // std::cout <<"[Torque - calculated] torque"<<i+1<<"="<<msg_tmp._joints[i]<<std::endl;
+}
+
+/* ######## Send calculated torque ######## */
+sm_producer.writeAsynchronously(msg_tmp);
+
+
+							
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Move] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Move] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+

@@ -1,0 +1,12 @@
+package kuka_joints_msgs;
+
+message KukaJoints
+{
+  required double                 joint_0    = 1 [default = 0.04];
+  required double                 joint_1    = 2 [default = 0.4];
+  required double                 joint_2    = 3 [default = 0.4];
+  required double                 joint_3    = 4 [default = 0.4];
+  required double                 joint_4    = 5 [default = 0.4];
+  required double                 joint_5    = 6 [default = 0.4];
+  required double                 joint_6    = 7 [default = 0.4];
+}

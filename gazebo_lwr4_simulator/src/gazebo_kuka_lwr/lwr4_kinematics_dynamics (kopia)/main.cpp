@@ -1,0 +1,1 @@
+/home/maximus/git/phd/projekty/lwr4_test/main.cpp

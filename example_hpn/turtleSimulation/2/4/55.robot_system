@@ -1,0 +1,36 @@
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>cs</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>moveSouth</behaviourName>
+<behaviourId>3</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> _internalBufferX.data>CS_MAX_ITERATION </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+
+if(_rotationCompleted.data==0){
+	//	rotation has not been completed
+	return ;
+}
+
+_outputBufferDirection.data=GO_SOUTH;
+
+if(_internalBufferX.data>CS_MAX_ITERATION){
+	_internalBufferX.data=0;
+}
+else{
+	_internalBufferX.data=_internalBufferX.data+1;
+}
+								
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour moveSouth] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour moveSouth] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+

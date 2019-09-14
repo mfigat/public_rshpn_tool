@@ -1,0 +1,6 @@
+Wnętrze pliku .gitignore :
+*.pyc
+*~
+
+
+

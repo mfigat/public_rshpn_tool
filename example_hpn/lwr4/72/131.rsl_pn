@@ -1,0 +1,210 @@
+<Places>
+<Place>
+	<id>132</id>
+	<hasAction>0</hasAction>
+	<isHierarchical>0</isHierarchical>
+	<isInputPlace>1</isInputPlace>
+	<isOutputPlace>0</isOutputPlace>
+	<isAssociated>0</isAssociated>
+	<associatedPlaceId>-1</associatedPlaceId>
+	<isPetriNetDetermined>1</isPetriNetDetermined>
+	<numberOfTokens>0</numberOfTokens>
+	<placeName>^{}\rm p_{agent2,ve, in}^{}</placeName>
+	<isLatexLabelVisible>0</isLatexLabelVisible>
+	<actionCode></actionCode>
+	<isCorrect>1</isCorrect>
+	<pos><posX>230</posX><posY>100</posY></pos>
+	<inputEdgesList></inputEdgesList>
+	<outputEdgesList>0</outputEdgesList>
+<petriNetLayer>2</petriNetLayer>
+<isPlaceNameGenerated>0</isPlaceNameGenerated>
+</Place>
+<Place>
+	<id>133</id>
+	<hasAction>0</hasAction>
+	<isHierarchical>1</isHierarchical>
+	<isInputPlace>0</isInputPlace>
+	<isOutputPlace>0</isOutputPlace>
+	<isAssociated>0</isAssociated>
+	<associatedPlaceId>-1</associatedPlaceId>
+	<isPetriNetDetermined>1</isPetriNetDetermined>
+	<numberOfTokens>0</numberOfTokens>
+	<placeName>^{}\mathcal{P}_{\rm agent2,ve,Init}^{\mathcal{B}}</placeName>
+	<isLatexLabelVisible>0</isLatexLabelVisible>
+	<actionCode></actionCode>
+	<isCorrect>1</isCorrect>
+	<pos><posX>165</posX><posY>240</posY></pos>
+	<inputEdgesList>1</inputEdgesList>
+	<outputEdgesList>2</outputEdgesList>
+<petriNetLayer>2</petriNetLayer>
+<isPlaceNameGenerated>0</isPlaceNameGenerated>
+</Place>
+<Place>
+	<id>151</id>
+	<hasAction>0</hasAction>
+	<isHierarchical>1</isHierarchical>
+	<isInputPlace>0</isInputPlace>
+	<isOutputPlace>0</isOutputPlace>
+	<isAssociated>0</isAssociated>
+	<associatedPlaceId>-1</associatedPlaceId>
+	<isPetriNetDetermined>1</isPetriNetDetermined>
+	<numberOfTokens>0</numberOfTokens>
+	<placeName>^{}\mathcal{P}_{\rm agent2,ve,Move}^{\mathcal{B}}</placeName>
+	<isLatexLabelVisible>0</isLatexLabelVisible>
+	<actionCode></actionCode>
+	<isCorrect>1</isCorrect>
+	<pos><posX>295</posX><posY>240</posY></pos>
+	<inputEdgesList>3</inputEdgesList>
+	<outputEdgesList>5</outputEdgesList>
+<petriNetLayer>2</petriNetLayer>
+<isPlaceNameGenerated>0</isPlaceNameGenerated>
+</Place>
+<Place>
+	<id>169</id>
+	<hasAction>0</hasAction>
+	<isHierarchical>0</isHierarchical>
+	<isInputPlace>0</isInputPlace>
+	<isOutputPlace>1</isOutputPlace>
+	<isAssociated>0</isAssociated>
+	<associatedPlaceId>-1</associatedPlaceId>
+	<isPetriNetDetermined>1</isPetriNetDetermined>
+	<numberOfTokens>0</numberOfTokens>
+	<placeName>^{}\rm p_{agent2,ve, out}^{}</placeName>
+	<isLatexLabelVisible>0</isLatexLabelVisible>
+	<actionCode></actionCode>
+	<isCorrect>1</isCorrect>
+	<pos><posX>230</posX><posY>450</posY></pos>
+	<inputEdgesList>4</inputEdgesList>
+	<outputEdgesList></outputEdgesList>
+<petriNetLayer>2</petriNetLayer>
+<isPlaceNameGenerated>0</isPlaceNameGenerated>
+</Place>
+</Places>
+<Transitions>
+<Transition>
+	<id>107</id>
+	<transitionName>^{}\rm t_{agent2,ve, in}</transitionName>
+	<transitionCondition>[true]</transitionCondition>
+	<transitionPriority>1</transitionPriority>
+	<isCorrect>1</isCorrect>
+	<isLatexLabelVisible>0</isLatexLabelVisible>
+	<pos><posX>205</posX><posY>170</posY></pos>
+	<inputEdgesList>0</inputEdgesList>
+	<outputEdgesList>1</outputEdgesList>
+<petriNetLayer>2</petriNetLayer>
+<isTransitionNameGenerated>0</isTransitionNameGenerated>
+</Transition>
+<Transition>
+	<id>136</id>
+	<transitionName>^{}\rm t_{agent2,ve,Move, 1}</transitionName>
+	<transitionCondition>[ true ]</transitionCondition>
+	<transitionPriority>1</transitionPriority>
+	<isCorrect>1</isCorrect>
+	<isLatexLabelVisible>0</isLatexLabelVisible>
+	<pos><posX>230</posX><posY>310</posY></pos>
+	<inputEdgesList>2</inputEdgesList>
+	<outputEdgesList>3</outputEdgesList>
+<petriNetLayer>2</petriNetLayer>
+<isTransitionNameGenerated>0</isTransitionNameGenerated>
+</Transition>
+<Transition>
+	<id>137</id>
+	<transitionName>^{}\rm t_{agent2,ve, out}</transitionName>
+	<transitionCondition>[ false ]</transitionCondition>
+	<transitionPriority>1</transitionPriority>
+	<isCorrect>1</isCorrect>
+	<isLatexLabelVisible>0</isLatexLabelVisible>
+	<pos><posX>205</posX><posY>380</posY></pos>
+	<inputEdgesList>5</inputEdgesList>
+	<outputEdgesList>4</outputEdgesList>
+<petriNetLayer>2</petriNetLayer>
+<isTransitionNameGenerated>0</isTransitionNameGenerated>
+</Transition>
+</Transitions>
+<Edges>
+<Edge>
+	<isPlaceTransitionEdge>1</isPlaceTransitionEdge>
+	<place>0</place>
+	<transition>0</transition>
+	<isCorrect>1</isCorrect>
+	<isNorthHeaded>0</isNorthHeaded>
+	<temporaryPoint><posX>255</posX><posY>255</posY></temporaryPoint>
+	<listOfPoints>	<Point><posX>255</posX><posY>125</posY></Point>
+	<Point><posX>255</posX><posY>170</posY></Point>
+</listOfPoints>
+</Edge>
+<Edge>
+	<isPlaceTransitionEdge>0</isPlaceTransitionEdge>
+	<place>1</place>
+	<transition>0</transition>
+	<isCorrect>1</isCorrect>
+	<isNorthHeaded>0</isNorthHeaded>
+	<temporaryPoint><posX>265</posX><posY>265</posY></temporaryPoint>
+	<listOfPoints>	<Point><posX>255</posX><posY>190</posY></Point>
+	<Point><posX>190</posX><posY>265</posY></Point>
+</listOfPoints>
+</Edge>
+<Edge>
+	<isPlaceTransitionEdge>1</isPlaceTransitionEdge>
+	<place>1</place>
+	<transition>1</transition>
+	<isCorrect>1</isCorrect>
+	<isNorthHeaded>0</isNorthHeaded>
+	<temporaryPoint><posX>280</posX><posY>280</posY></temporaryPoint>
+	<listOfPoints>	<Point><posX>190</posX><posY>265</posY></Point>
+	<Point><posX>280</posX><posY>310</posY></Point>
+</listOfPoints>
+</Edge>
+<Edge>
+	<isPlaceTransitionEdge>0</isPlaceTransitionEdge>
+	<place>2</place>
+	<transition>1</transition>
+	<isCorrect>1</isCorrect>
+	<isNorthHeaded>1</isNorthHeaded>
+	<temporaryPoint><posX>265</posX><posY>265</posY></temporaryPoint>
+	<listOfPoints>	<Point><posX>280</posX><posY>310</posY></Point>
+	<Point><posX>320</posX><posY>265</posY></Point>
+</listOfPoints>
+</Edge>
+<Edge>
+	<isPlaceTransitionEdge>0</isPlaceTransitionEdge>
+	<place>3</place>
+	<transition>2</transition>
+	<isCorrect>1</isCorrect>
+	<isNorthHeaded>0</isNorthHeaded>
+	<temporaryPoint><posX>475</posX><posY>475</posY></temporaryPoint>
+	<listOfPoints>	<Point><posX>255</posX><posY>400</posY></Point>
+	<Point><posX>255</posX><posY>475</posY></Point>
+</listOfPoints>
+</Edge>
+<Edge>
+	<isPlaceTransitionEdge>1</isPlaceTransitionEdge>
+	<place>2</place>
+	<transition>2</transition>
+	<isCorrect>1</isCorrect>
+	<isNorthHeaded>0</isNorthHeaded>
+	<temporaryPoint><posX>255</posX><posY>255</posY></temporaryPoint>
+	<listOfPoints>	<Point><posX>320</posX><posY>265</posY></Point>
+	<Point><posX>255</posX><posY>380</posY></Point>
+</listOfPoints>
+</Edge>
+</Edges>
+<IncludeFile> 
+#include "../../../../my_libs/lwr4_kinematics_dynamics/lwr4_kinematics_dynamics.h"
+#include "../../../../my_libs/shared_memory/shared_memory.h"
+
+LWR4KinematicsDynamics lwr=LWR4KinematicsDynamics(0, 30, 0, 10);
+
+struct lwr4_kinematics_params tmp;
+SharedMemory<struct lwr4_kinematics_params> sm_consumer("shared_memory_lwr4_kinematics_params", SharedMemoryType::Consumer);
+
+struct lwr4_joints msg_tmp;
+SharedMemory<struct lwr4_joints> sm_producer("shared_memory_torque", SharedMemoryType::Producer);
+
+std::array<double,7> torque_grav, torque_impedance;
+
+/* Desired positions */
+double x_d=0.56, y_d=0.17, z_d=0.8;
+
+					</IncludeFile>
+

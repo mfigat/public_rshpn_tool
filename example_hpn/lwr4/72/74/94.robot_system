@@ -1,0 +1,32 @@
+<Behaviour>
+<robotSystemName>lwr4</robotSystemName>
+<agentName>agent2</agentName>
+<subsystemName>cs2</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Idle</behaviourName>
+<behaviourId>1</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> iterations.data>MAX_ITERATIONS_HOME_POSITION </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_2*/
+ 
+flag.data=1;
+x_d=0;
+y_d=0;
+z_d=0.5;
+desired_x.data=x_d;
+desired_y.data=y_d;
+desired_z.data=z_d;
+
+iterations.data++;
+lastMode.data=mode.data;
+
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Idle] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Idle] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+

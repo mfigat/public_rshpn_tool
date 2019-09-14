@@ -1,0 +1,48 @@
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>cs</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>moveSouth</behaviourName>
+<behaviourId>3</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> _moveSouthFinished.data==1 </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+
+_moveNorthFinished.data=0;
+_moveEastFinished.data=0;
+_moveWestFinished.data=0;
+
+
+if(_isFirst.data==1){
+	_isFirst.data=0;	
+	_beginMovement.data=1;
+}
+else{
+	_beginMovement.data=1;
+}
+
+_desiredAngle.data=GO_SOUTH_DIRECTION;
+_desiredDirection.data=GO_SOUTH;
+
+if(_moveSouthFinished.data==1){
+	_beginMovement.data=1;
+	_desiredDirection.data=0;
+	_isFirst.data=1;
+}
+
+std::cout<<"[CS - MOVE SOUTH]"<<std::endl;
+
+
+								
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour moveSouth] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour moveSouth] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+

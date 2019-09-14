@@ -1,0 +1,152 @@
+<Subsystem>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType>e</subsystemType>
+<subsystemIndex>2</subsystemIndex>
+<subsystemFrequency>1</subsystemFrequency>
+<subsystemIncludeFile> #define VE_MAX_ITERATION 7 </subsystemIncludeFile>
+<isNonBlockingMode>0</isNonBlockingMode>
+<isInitialStateSpecified>0</isInitialStateSpecified>
+<initialStateName>S_Idle</initialStateName>
+<initialStateId>0</initialStateId>
+<SubsystemStates>
+<SubsystemState>
+<stateName>S_Idle</stateName>
+<stateId>0</stateId>
+<behaviourId>0</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_Rotate</nextStateName>
+<nextStateId>1</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_Rotate</stateName>
+<stateId>1</stateId>
+<behaviourId>1</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_MoveAlong</nextStateName>
+<nextStateId>2</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+<SubsystemState>
+<stateName>S_MoveAlong</stateName>
+<stateId>2</stateId>
+<behaviourId>2</behaviourId>
+<ChildStates>
+<ChildState>
+<nextStateName>S_Rotate</nextStateName>
+<nextStateId>1</nextStateId>
+<initialConditionBody>[ true ]</initialConditionBody>
+</ChildState>
+</ChildStates>
+</SubsystemState>
+</SubsystemStates>
+<Behaviours>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Idle</behaviourName>
+<behaviourId>0</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> true </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+std::cout<<"[Idle] -- Calculating Transition Function"<<std::endl;
+_inputBufferDirection.data=0;
+								
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Idle] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Idle] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>Rotate</behaviourName>
+<behaviourId>1</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> _inputBufferDirection.data>0 && _internalBufferInt.data>0 </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+std::cout<<"[Rotate] -- Calculating Transition Function"<<std::endl;
+std::cout<<"Message="<<_inputBufferDirection.data<<std::endl;
+if(_inputBufferDirection.data==0) return;
+_outputBufferTwist.linear.x=0;
+_outputBufferTwist.angular.z=-1.570796;
+_internalBufferInt.data=_inputBufferDirection.data;
+								
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour Rotate] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour Rotate] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+<Behaviour>
+<robotSystemName>turtleSimulation</robotSystemName>
+<agentName>agent</agentName>
+<subsystemName>ve</subsystemName>
+<subsystemType></subsystemType>
+<behaviourName>MoveAlong</behaviourName>
+<behaviourId>2</behaviourId>
+<transitionFunctionPlaceId>1</transitionFunctionPlaceId>
+<sendDataPlaceId>2</sendDataPlaceId>
+<receiveDataPlaceId>4</receiveDataPlaceId>
+<terminalConditionTransitionId>5</terminalConditionTransitionId>
+<continueConditionTransitionId>4</continueConditionTransitionId>
+<terminalConditionBody> _internalBufferInt.data!=_inputBufferDirection.data </terminalConditionBody>
+<errorConditionBody>false</errorConditionBody>
+<transitionFunctionBody>/* Partial transition function - name - tf1_1*/
+
+std::cout<<"[MoveAlong] -- Calculating Transition Function"<<std::endl;
+_outputBufferTwist.linear.x=1;
+_outputBufferTwist.angular.z=0;
+								
+</transitionFunctionBody>
+<sendDataBody>std::cout<<"[Behaviour MoveAlong] -- Sending Data"<<std::endl;</sendDataBody>
+<receiveDataBody>std::cout<<"[Behaviour MoveAlong] -- Receiving Data"<<std::endl;</receiveDataBody>
+</Behaviour>
+</Behaviours>
+<InternalBuffers>
+<Buffer>
+<bufferName>_internalBufferInt</bufferName>
+<bufferDataType>std_msgs::Int64</bufferDataType>
+<bufferType>0</bufferType>
+<connectionName>_internalBufferInt</connectionName>
+</Buffer>
+</InternalBuffers>
+<InputBuffers>
+<Buffer>
+<bufferName>_inputBufferDirection</bufferName>
+<bufferDataType>std_msgs::Float64</bufferDataType>
+<bufferType>1</bufferType>
+<connectionName>topicDirection</connectionName>
+</Buffer>
+</InputBuffers>
+<OutputBuffers>
+<Buffer>
+<bufferName>_outputBufferTwist</bufferName>
+<bufferDataType>geometry_msgs::Twist</bufferDataType>
+<bufferType>2</bufferType>
+<connectionName>/turtle1/cmd_vel</connectionName>
+</Buffer>
+</OutputBuffers>
+</Subsystem>
+

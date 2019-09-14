@@ -1,0 +1,141 @@
+<Places>
+<Place>
+	<id>90</id>
+	<hasAction>0</hasAction>
+	<isHierarchical>0</isHierarchical>
+	<isInputPlace>1</isInputPlace>
+	<isOutputPlace>0</isOutputPlace>
+	<isAssociated>0</isAssociated>
+	<associatedPlaceId>-1</associatedPlaceId>
+	<isPetriNetDetermined>1</isPetriNetDetermined>
+	<numberOfTokens>0</numberOfTokens>
+	<placeName>^{}\rm p_{agent2,cs2,Init, rcv, in}^{}</placeName>
+	<isLatexLabelVisible>0</isLatexLabelVisible>
+	<actionCode></actionCode>
+	<isCorrect>1</isCorrect>
+	<pos><posX>230</posX><posY>100</posY></pos>
+	<inputEdgesList></inputEdgesList>
+	<outputEdgesList>0</outputEdgesList>
+<petriNetLayer>4</petriNetLayer>
+<isPlaceNameGenerated>0</isPlaceNameGenerated>
+</Place>
+<Place>
+	<id>91</id>
+	<hasAction>1</hasAction>
+	<isHierarchical>0</isHierarchical>
+	<isInputPlace>0</isInputPlace>
+	<isOutputPlace>0</isOutputPlace>
+	<isAssociated>0</isAssociated>
+	<associatedPlaceId>-1</associatedPlaceId>
+	<isPetriNetDetermined>1</isPetriNetDetermined>
+	<numberOfTokens>0</numberOfTokens>
+	<placeName>^{}\rm p_{agent2,cs2,Init, rcv, 1}^{}</placeName>
+	<isLatexLabelVisible>0</isLatexLabelVisible>
+	<actionCode>/* 	Buffer name: mode
+	 Utilised to receive data of type: std_msgs::Int64
+	From communication channel: /agent1/mode
+	Define activity for a such buffer! */</actionCode>
+	<isCorrect>1</isCorrect>
+	<pos><posX>230</posX><posY>240</posY></pos>
+	<inputEdgesList>1</inputEdgesList>
+	<outputEdgesList>3</outputEdgesList>
+<petriNetLayer>4</petriNetLayer>
+<isPlaceNameGenerated>0</isPlaceNameGenerated>
+</Place>
+<Place>
+	<id>92</id>
+	<hasAction>0</hasAction>
+	<isHierarchical>0</isHierarchical>
+	<isInputPlace>0</isInputPlace>
+	<isOutputPlace>1</isOutputPlace>
+	<isAssociated>0</isAssociated>
+	<associatedPlaceId>-1</associatedPlaceId>
+	<isPetriNetDetermined>1</isPetriNetDetermined>
+	<numberOfTokens>0</numberOfTokens>
+	<placeName>^{}\rm p_{agent2,cs2,Init, rcv, out}^{}</placeName>
+	<isLatexLabelVisible>0</isLatexLabelVisible>
+	<actionCode></actionCode>
+	<isCorrect>1</isCorrect>
+	<pos><posX>230</posX><posY>380</posY></pos>
+	<inputEdgesList>2</inputEdgesList>
+	<outputEdgesList></outputEdgesList>
+<petriNetLayer>4</petriNetLayer>
+<isPlaceNameGenerated>0</isPlaceNameGenerated>
+</Place>
+</Places>
+<Transitions>
+<Transition>
+	<id>71</id>
+	<transitionName>^{}\rm t_{agent2,cs2,Init, rcv, in}</transitionName>
+	<transitionCondition>[true]</transitionCondition>
+	<transitionPriority>1</transitionPriority>
+	<isCorrect>1</isCorrect>
+	<isLatexLabelVisible>0</isLatexLabelVisible>
+	<pos><posX>205</posX><posY>170</posY></pos>
+	<inputEdgesList>0</inputEdgesList>
+	<outputEdgesList>1</outputEdgesList>
+<petriNetLayer>4</petriNetLayer>
+<isTransitionNameGenerated>0</isTransitionNameGenerated>
+</Transition>
+<Transition>
+	<id>72</id>
+	<transitionName>^{}\rm t_{agent2,cs2,Init, rcv, out}</transitionName>
+	<transitionCondition>[true]</transitionCondition>
+	<transitionPriority>1</transitionPriority>
+	<isCorrect>1</isCorrect>
+	<isLatexLabelVisible>0</isLatexLabelVisible>
+	<pos><posX>205</posX><posY>310</posY></pos>
+	<inputEdgesList>3</inputEdgesList>
+	<outputEdgesList>2</outputEdgesList>
+<petriNetLayer>4</petriNetLayer>
+<isTransitionNameGenerated>0</isTransitionNameGenerated>
+</Transition>
+</Transitions>
+<Edges>
+<Edge>
+	<isPlaceTransitionEdge>1</isPlaceTransitionEdge>
+	<place>0</place>
+	<transition>0</transition>
+	<isCorrect>1</isCorrect>
+	<isNorthHeaded>0</isNorthHeaded>
+	<temporaryPoint><posX>255</posX><posY>255</posY></temporaryPoint>
+	<listOfPoints>	<Point><posX>255</posX><posY>125</posY></Point>
+	<Point><posX>255</posX><posY>170</posY></Point>
+</listOfPoints>
+</Edge>
+<Edge>
+	<isPlaceTransitionEdge>0</isPlaceTransitionEdge>
+	<place>1</place>
+	<transition>0</transition>
+	<isCorrect>1</isCorrect>
+	<isNorthHeaded>0</isNorthHeaded>
+	<temporaryPoint><posX>265</posX><posY>265</posY></temporaryPoint>
+	<listOfPoints>	<Point><posX>255</posX><posY>190</posY></Point>
+	<Point><posX>255</posX><posY>265</posY></Point>
+</listOfPoints>
+</Edge>
+<Edge>
+	<isPlaceTransitionEdge>0</isPlaceTransitionEdge>
+	<place>2</place>
+	<transition>1</transition>
+	<isCorrect>1</isCorrect>
+	<isNorthHeaded>0</isNorthHeaded>
+	<temporaryPoint><posX>405</posX><posY>405</posY></temporaryPoint>
+	<listOfPoints>	<Point><posX>255</posX><posY>330</posY></Point>
+	<Point><posX>255</posX><posY>405</posY></Point>
+</listOfPoints>
+</Edge>
+<Edge>
+	<isPlaceTransitionEdge>1</isPlaceTransitionEdge>
+	<place>1</place>
+	<transition>1</transition>
+	<isCorrect>1</isCorrect>
+	<isNorthHeaded>0</isNorthHeaded>
+	<temporaryPoint><posX>255</posX><posY>255</posY></temporaryPoint>
+	<listOfPoints>	<Point><posX>255</posX><posY>265</posY></Point>
+	<Point><posX>255</posX><posY>310</posY></Point>
+</listOfPoints>
+</Edge>
+</Edges>
+<IncludeFile></IncludeFile>
+
