@@ -53,17 +53,17 @@ include_directories(
 
 
 set( SOURCES_shared_memory
-	../../../ros/my_libs/shared_memory/shared_memory.cpp
+	../../../my_libs/shared_memory/shared_memory.cpp
 )
 set( HEADERS_shared_memory
-	../../../ros/my_libs/shared_memory/shared_memory.H
+	../../../my_libs/shared_memory/shared_memory.H
 )
 
 set( SOURCES_lwr4_kinematics_dynamics
-	../../../ros/my_libs/lwr4_kinematics_dynamics/lwr4_kinematics_dynamics.cpp
+	../../../my_libs/lwr4_kinematics_dynamics/lwr4_kinematics_dynamics.cpp
 )
 set( HEADERS_lwr4_kinematics_dynamics
-	../../../ros/my_libs/lwr4_kinematics_dynamics/lwr4_kinematics_dynamics.H
+	../../../my_libs/lwr4_kinematics_dynamics/lwr4_kinematics_dynamics.H
 )
 
 

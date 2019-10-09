@@ -1,0 +1,9 @@
+/home/maximus/git/phd/projekty/shared_memory/CMakeFiles/install/strip.dir
+/home/maximus/git/phd/projekty/shared_memory/CMakeFiles/install/local.dir
+/home/maximus/git/phd/projekty/shared_memory/CMakeFiles/install.dir
+/home/maximus/git/phd/projekty/shared_memory/CMakeFiles/producer.dir
+/home/maximus/git/phd/projekty/shared_memory/CMakeFiles/edit_cache.dir
+/home/maximus/git/phd/projekty/shared_memory/CMakeFiles/shared_memory.dir
+/home/maximus/git/phd/projekty/shared_memory/CMakeFiles/rebuild_cache.dir
+/home/maximus/git/phd/projekty/shared_memory/CMakeFiles/consumer.dir
+/home/maximus/git/phd/projekty/shared_memory/CMakeFiles/list_install_components.dir

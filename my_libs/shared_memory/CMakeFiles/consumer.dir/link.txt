@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/consumer.dir/consumer.cpp.o  -o consumer -Wl,-rpath,/home/maximus/git/phd/projekty/shared_memory: -lpthread libshared_memory.so -lrt -lpthread 

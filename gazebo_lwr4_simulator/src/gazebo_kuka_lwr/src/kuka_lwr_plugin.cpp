@@ -33,10 +33,10 @@
 #include "kuka_joints.pb.h"
 
 // lwr4_kinematics_dynamics - moja biblioteka
-#include "../../../../ros/my_libs/lwr4_kinematics_dynamics/lwr4_kinematics_dynamics.h"
+#include "../../../../my_libs/lwr4_kinematics_dynamics/lwr4_kinematics_dynamics.h"
 
 // shared memory - moja biblioteka
-#include "../../../../ros/my_libs/shared_memory/shared_memory.h"
+#include "../../../../my_libs/shared_memory/shared_memory.h"
 
 //#define gravity_constant 9.80665 // gravity acceleration - from General Conference on Weights and Measures - 1901 year
 #define gravity_constant 9.81 // gravity acceleration - option 2

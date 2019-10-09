@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/maximus/git/phd/projekty/shared_memory/shared_memory.cpp
+shared_memory.h
+/home/maximus/git/phd/projekty/shared_memory/shared_memory.h
+
+/home/maximus/git/phd/projekty/shared_memory/shared_memory.h
+boost/interprocess/shared_memory_object.hpp
+-
+boost/interprocess/mapped_region.hpp
+-
+cstring
+-
+cstdlib
+-
+string
+-
+boost/lambda/lambda.hpp
+-
+iostream
+-
+iterator
+-
+algorithm
+-
+boost/version.hpp
+-
+stdio.h
+-
+stdlib.h
+-
+time.h
+-
+math.h
+-
+boost/interprocess/sync/interprocess_semaphore.hpp
+-
+iostream
+-
+
