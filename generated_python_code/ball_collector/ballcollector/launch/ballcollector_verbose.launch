@@ -1,0 +1,20 @@
+<launch>
+	<group ns="/ballcollector">
+		<remap from="/ballcollector/desiredRobotCommandChannelTele" to="/teleoperated/desiredRobotCommandChannelTele"/>
+		<remap from="/ballcollector/desiredRobotCommandChannelAuto" to="/autonomous/desiredRobotCommandChannelAuto"/>
+		<remap from="/ballcollector/desiredRobotSpeedChannelAuto" to="/autonomous/desiredRobotSpeedChannelAuto"/>
+		<remap from="/ballcollector/desiredVaccumSpeedChannelAuto" to="/autonomous/desiredVaccumSpeedChannelAuto"/>
+		<remap from="/ballcollector/obstacleDetectedChannelAuto" to="/ballcollector/obstacleDetectedChannelAuto"/>
+		<remap from="/ballcollector/obstacleDetectedChannelTele" to="/ballcollector/obstacleDetectedChannelTele"/>
+		<remap from="/ballcollector/ballInfoRpiChannelAuto" to="/ballcollector/ballInfoRpiChannelAuto"/>
+		<remap from="/ballcollector/ballInfoChannelTele" to="/ballcollector/ballInfoChannelTele"/>
+		<remap from="/ballcollector/ballCollectedChannelTele" to="/ballcollector/ballCollectedChannelTele"/>
+		<remap from="/ballcollector/ballCollectedChannelAuto" to="/ballcollector/ballCollectedChannelAuto"/>
+		<node pkg="ballcollector" name="cs" type="subsystem_cs.py" output="screen"/>
+		<node pkg="ballcollector" name="camera" type="subsystem_camera.py" output="screen"/>
+		<node pkg="ballcollector" name="sensors" type="subsystem_sensors.py" output="screen"/>
+		<node pkg="ballcollector" name="motor" type="subsystem_motor.py" output="screen"/>
+		<node pkg="ballcollector" name="vacuum" type="subsystem_vacuum.py" output="screen"/>
+	</group>
+</launch>
+

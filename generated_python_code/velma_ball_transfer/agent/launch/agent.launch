@@ -1,0 +1,6 @@
+<launch>
+	<group ns="agent">
+		<node pkg="agent" name="cs" type="subsystem_cs.py"/>
+	</group>
+</launch>
+

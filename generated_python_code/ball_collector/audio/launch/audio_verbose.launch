@@ -1,0 +1,10 @@
+<launch>
+	<group ns="/audio">
+		<remap from="/audio/statusCommandChannel" to="/supervisor/statusCommandChannel"/>
+		<remap from="/audio/recognisedCommandChannel" to="/audio/recognisedCommandChannel"/>
+		<node pkg="audio" name="cs" type="subsystem_cs.py" output="screen"/>
+		<node pkg="audio" name="loudspeaker" type="subsystem_loudspeaker.py" output="screen"/>
+		<node pkg="audio" name="mic" type="subsystem_mic.py" output="screen"/>
+	</group>
+</launch>
+

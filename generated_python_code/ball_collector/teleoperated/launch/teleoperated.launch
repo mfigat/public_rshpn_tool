@@ -1,0 +1,12 @@
+<launch>
+	<group ns="/teleoperated">
+		<remap from="/teleoperated/taskCommandChannel" to="/supervisor/taskCommandChannel"/>
+		<remap from="/teleoperated/ballInfoChannelTele" to="/ballcollector/ballInfoChannelTele"/>
+		<remap from="/teleoperated/obstacleDetectedChannelTele" to="/ballcollector/obstacleDetectedChannelTele"/>
+		<remap from="/teleoperated/ballCollectedChannelTele" to="/ballcollector/ballCollectedChannelTele"/>
+		<remap from="/teleoperated/taskStatusChannelTele" to="/teleoperated/taskStatusChannelTele"/>
+		<remap from="/teleoperated/desiredRobotCommandChannelTele" to="/teleoperated/desiredRobotCommandChannelTele"/>
+		<node pkg="teleoperated" name="cs" type="subsystem_cs.py"/>
+	</group>
+</launch>
+

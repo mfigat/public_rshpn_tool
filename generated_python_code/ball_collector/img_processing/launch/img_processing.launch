@@ -1,0 +1,13 @@
+<launch>
+	<group ns="/img_processing">
+		<remap from="/img_processing/color/image_raw" to="/camera/color/image_raw"/>
+		<remap from="/img_processing/rpiCameraChannel" to="/ballcollector/rpiCameraChannel"/>
+		<remap from="/img_processing/intelCameraChannel" to="/img_processing/intelCameraChannel"/>
+		<remap from="/img_processing/detectedBallsChannel" to="/img_processing/detectedBallsChannel"/>
+		<remap from="/img_processing/detectedBallsRpiChannel" to="/img_processing/detectedBallsRpiChannel"/>
+		<remap from="/img_processing/bestBallDetectedIntelChannel" to="/img_processing/bestBallDetectedIntelChannel"/>
+		<remap from="/img_processing/bestBallDetectedRpiChannel" to="/img_processing/bestBallDetectedRpiChannel"/>
+		<node pkg="img_processing" name="cs" type="subsystem_cs.py"/>
+	</group>
+</launch>
+

@@ -1,0 +1,15 @@
+<launch>
+	<group ns="/autonomous">
+		<remap from="/autonomous/taskCommandChannel" to="/supervisor/taskCommandChannel"/>
+		<remap from="/autonomous/obstacleDetectedChannelAuto" to="/ballcollector/obstacleDetectedChannelAuto"/>
+		<remap from="/autonomous/ballCollectedChannelAuto" to="/ballcollector/ballCollectedChannelAuto"/>
+		<remap from="/autonomous/bestBallDetectedIntelChannel" to="/img_processing/bestBallDetectedIntelChannel"/>
+		<remap from="/autonomous/bestBallDetectedRpiChannel" to="/img_processing/bestBallDetectedRpiChannel"/>
+		<remap from="/autonomous/taskStatusChannelAuto" to="/autonomous/taskStatusChannelAuto"/>
+		<remap from="/autonomous/desiredRobotSpeedChannelAuto" to="/autonomous/desiredRobotSpeedChannelAuto"/>
+		<remap from="/autonomous/desiredRobotCommandChannelAuto" to="/autonomous/desiredRobotCommandChannelAuto"/>
+		<remap from="/autonomous/desiredVaccumSpeedChannelAuto" to="/autonomous/desiredVaccumSpeedChannelAuto"/>
+		<node pkg="autonomous" name="cs" type="subsystem_cs.py" output="screen"/>
+	</group>
+</launch>
+

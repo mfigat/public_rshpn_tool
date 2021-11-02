@@ -1,0 +1,11 @@
+<launch>
+	<group ns="/supervisor">
+		<remap from="/supervisor/recognisedCommandChannel" to="/audio/recognisedCommandChannel"/>
+		<remap from="/supervisor/taskStatusChannelTele" to="/teleoperated/taskStatusChannelTele"/>
+		<remap from="/supervisor/taskStatusChannelAuto" to="/autonomous/taskStatusChannelAuto"/>
+		<remap from="/supervisor/statusCommandChannel" to="/supervisor/statusCommandChannel"/>
+		<remap from="/supervisor/taskCommandChannel" to="/supervisor/taskCommandChannel"/>
+		<node pkg="supervisor" name="cs" type="subsystem_cs.py"/>
+	</group>
+</launch>
+
